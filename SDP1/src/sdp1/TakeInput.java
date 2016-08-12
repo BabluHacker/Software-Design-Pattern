@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.InputStreamReader;
+import java.io.Writer;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
@@ -42,10 +43,14 @@ public class TakeInput {
     //time
     int time2;
     
-    public TakeInput(){
-        
+    //writing file introducing
+    Writer write;
+    public TakeInput(Writer write){
+        //file to write
         file = new File("in.txt");
+        //////
         rand = new Random();
+        this.write= write;
         System.out.println("thread started "+ "make input\n");
         
     }
@@ -66,7 +71,7 @@ public class TakeInput {
         prof_B B = new prof_B(BFullList, DFullList, time1);
         
         //for prof_D
-        prof_D D = new prof_D(DFullList, time1);
+        prof_D D = new prof_D(DFullList, time1, write);
         //starting thread........
         
         new Thread(A1).start();

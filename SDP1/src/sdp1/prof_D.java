@@ -6,6 +6,8 @@
 
 package sdp1;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
@@ -21,11 +23,16 @@ public class prof_D implements Runnable{
     public Queue<String> q;
     PassGenerator passwd ;
     long time1;
-    public prof_D(BlockingQueue<String> list, long time){
+    //for file writing
+    Writer write;
+    public prof_D(BlockingQueue<String> list, long time, Writer write){
         this.FullList = list;
         q = new LinkedList<String>();
         this.time1 = time;
-        passwd = new PassGenerator(this.time1);
+        //for file writing
+        this.write = write;
+        /////
+        passwd = new PassGenerator(this.time1, write);
         
     }
 
@@ -54,7 +61,19 @@ public class prof_D implements Runnable{
                 System.out.println("error");
             }
              
-        
+            /*if(FullList.isEmpty()){
+                break;
+            }*/
         }
+        /*try {
+            write.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(prof_D.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            write.close();
+        } catch (IOException ex) {
+            Logger.getLogger(prof_D.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
     }
 }

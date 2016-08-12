@@ -6,6 +6,8 @@
 
 package sdp1;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Date;
 import java.util.UUID;
 
@@ -15,14 +17,26 @@ import java.util.UUID;
  */
 public class PassGenerator {
     long time1;
-    
-    public PassGenerator(long time){
+    Writer write;
+    public PassGenerator(long time, Writer write){
         this.time1 = time;
+        //for writing file
+        this.write = write;
+        ///
+        
     }
-    public void generate(String ID){
+    public void generate(String ID) throws IOException{
         Date date = new Date();
         long time = date.getTime();
         String uuid = UUID.randomUUID().toString();
-        System.out.println("ID: "+ID+"  pass: "+uuid+" Time: "+((time/1000)-time1) +"  ");
+        String IdPasswd = " ID: "+ID+"  pass: "+uuid+" Time: "+((time/1000)-time1);
+        System.out.println(IdPasswd);
+        //writing...
+        write.append(IdPasswd);
+        write.append("\r\n");
+        write.flush();
+        
+        
+        
     }
 }
