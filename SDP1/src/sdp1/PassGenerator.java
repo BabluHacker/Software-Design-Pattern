@@ -25,11 +25,11 @@ public class PassGenerator {
         ///
         
     }
-    public void generate(String ID) throws IOException{
+    public void generate(student ID) throws IOException{
         Date date = new Date();
         long time = date.getTime();
         String uuid = UUID.randomUUID().toString();
-        String IdPasswd = " ID: "+ID+"  pass: "+uuid+" Time: "+((time/1000)-time1);
+        String IdPasswd = " ID: "+ID.getID()+"  pass: "+uuid+" Time: "+((time/1000)-time1);
         System.out.println(IdPasswd);
         //writing...
         write.append(IdPasswd);

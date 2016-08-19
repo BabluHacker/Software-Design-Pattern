@@ -6,7 +6,6 @@
 
 package sdp1;
 
-import java.io.IOException;
 import java.io.Writer;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -19,13 +18,13 @@ import java.util.logging.Logger;
  * @author mehedi
  */
 public class prof_D implements Runnable{
-    public BlockingQueue<String> FullList;
+    public BlockingQueue<student> FullList;
     public Queue<String> q;
     PassGenerator passwd ;
     long time1;
     //for file writing
     Writer write;
-    public prof_D(BlockingQueue<String> list, long time, Writer write){
+    public prof_D(BlockingQueue<student> list, long time, Writer write){
         this.FullList = list;
         q = new LinkedList<String>();
         this.time1 = time;
@@ -51,29 +50,17 @@ public class prof_D implements Runnable{
         while(true){
             System.out.println("prof D started to read all ID's in Full List ****************\n");
             try{
-                String temp = this.FullList.take();
+                student temp = this.FullList.take();
                 passwd.generate(temp);
-                System.out.println("ID in D :::   ^^***^ : "+temp);
+                System.out.println("ID in D :::   ^^***^ : "+temp.getPassword());
                 
                 
             }
             catch(Exception e){
                 System.out.println("error");
             }
-             
-            /*if(FullList.isEmpty()){
-                break;
-            }*/
+            
         }
-        /*try {
-            write.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(prof_D.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            write.close();
-        } catch (IOException ex) {
-            Logger.getLogger(prof_D.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        
     }
 }
